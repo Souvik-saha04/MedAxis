@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Kerala DHR System - Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e9ecef;
+            padding: 24px 0;
+        }
+
+        .logo {
+            padding: 0 24px 32px 24px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 4px;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 24px 0;
+        }
+
+        .nav-item {
+            margin-bottom: 4px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #6c757d;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .nav-link.active {
+            background: #1a1d29;
+            color: white;
+            margin: 0 12px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: #f8f9fa;
+            color: #495057;
+        }
+
+        .nav-link i {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .system-status {
+            margin: 24px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .status-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-time {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 32px;
+        }
+
+        .header {
+            margin-bottom: 32px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #212529;
+            line-height: 1;
+        }
+
+        .stat-change {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .stat-change.positive {
+            color: #28a745;
+        }
+
+        .stat-change.negative {
+            color: #dc3545;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .icon-blue {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .icon-green {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .icon-purple {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .icon-red {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .completion-rate {
+            font-size: 14px;
+            font-weight: 600;
+            color: #28a745;
+            margin-top: 4px;
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        /* Recent Activities */
+        .activities-section {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .activities-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 4px;
+        }
+
+        .activity-info p {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .activity-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge-sm {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #1a1d29;
+            color: white;
+        }
+
+        .status-pending {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .activity-time {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Kerala DHR System</h1>
+                <p>Digital Health Records for Migrant Workers</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i style="font-style: normal;">👥</i>
+                        Worker Registry
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa-regular fa-heart"></i>
+                        Health Records
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa-regular fa-file"></i>
+                        Documents
+                    </a>
+                </li>
+            </ul>
+
+            <div class="system-status">
+                <div class="status-header">
+                    <span style="font-weight: 600; font-size: 14px;">System Status</span>
+                    <span class="status-badge">Online</span>
+                </div>
+                <p class="status-time">Last sync: 2 mins ago</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h2>Dashboard Overview</h2>
+                <p>Monitor migrant worker health records and system statistics</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Total Workers</div>
+                            <div class="stat-value">1,497</div>
+                            <div class="stat-change positive">+12% from last month</div>
+                        </div>
+                        <div class="stat-icon icon-blue">👥</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Health Records</div>
+                            <div class="stat-value">2,341</div>
+                            <div class="stat-change positive">+8% from last month</div>
+                        </div>
+                        <div class="stat-icon icon-green"><i class="fa-regular fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Verified Documents</div>
+                            <div class="stat-value">1,203</div>
+                            <div class="completion-rate">98% completion</div>
+                        </div>
+                        <div class="stat-icon icon-purple"><i class="fa-regular fa-file"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div>
+                            <div class="stat-title">Pending Reviews</div>
+                            <div class="stat-value">23</div>
+                            <div class="stat-change negative">Requires attention</div>
+                        </div>
+                        <div class="stat-icon icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3 class="chart-title">Monthly Worker Registrations</h3>
+                    <div class="chart-container">
+                        <canvas id="registrationChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3 class="chart-title">Health Status Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="activities-section">
+                <h3 class="activities-title">Recent Activities</h3>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>New worker registration</h4>
+                        <p>Worker: Rajesh Kumar</p>
+                    </div>
+                    <div class="activity-status">
+                        <span class="status-badge-sm status-completed">completed</span>
+                        <span class="activity-time">2 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>Health check-up completed</h4>
+                        <p>Worker: Priya Sharma</p>
+                    </div>
+                    <div class="activity-status">
+                        <span class="status-badge-sm status-completed">completed</span>
+                        <span class="activity-time">4 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>Document verification pending</h4>
+                        <p>Worker: Mohammed Ali</p>
+                    </div>
+                    <div class="activity-status">
+                        <span class="status-badge-sm status-pending">pending</span>
+                        <span class="activity-time">6 hours ago</span>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-info">
+                        <h4>Emergency contact updated</h4>
+                        <p>Worker: Lakshmi Nair</p>
+                    </div>
+                    <div class="activity-status">
+                        <span class="status-badge-sm status-completed">completed</span>
+                        <span class="activity-time">1 day ago</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Bar Chart for Monthly Registrations
+        const ctx1 = document.getElementById('registrationChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    data: [250, 310, 420, 380, 460, 520],
+                    backgroundColor: '#4285f4',
+                    borderRadius: 6,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f0f0f0' },
+                        ticks: { color: '#666' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#666' }
+                    }
+                }
+            }
+        });
+
+        // Pie Chart for Health Status
+        const ctx2 = document.getElementById('healthChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Healthy', 'Under Care', 'Critical', 'Pending'],
+                datasets: [{
+                    data: [1240, 89, 12, 97],
+                    backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#6c757d'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // Add click handlers for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+                // Add active class to clicked link
+                link.classList.add('active');
+
+                // You can add page switching logic here
+                console.log('Navigating to:', link.textContent.trim());
+            });
+        });
+
+        // Simulate real-time updates
+        function updateStats() {
+            const workers = document.querySelector('.stat-value');
+            const currentValue = parseInt(workers.textContent.replace(',', ''));
+
+            // Simulate small random changes
+            const change = Math.floor(Math.random() * 5) - 2;
+            const newValue = Math.max(1400, currentValue + change);
+            workers.textContent = newValue.toLocaleString();
+        }
+
+        // Update stats every 30 seconds
+        setInterval(updateStats, 30000);
+    </script>
+</body>
+
+</html>
