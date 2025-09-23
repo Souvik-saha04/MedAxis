@@ -457,35 +457,32 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <h1>Kerala DHR System</h1>
+                <img src="MedicalCare.png" alt="description" width="200" height="200">
                 <p>Digital Health Records for Migrant Workers</p>
             </div>
 
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-page="dashboard">
-                        <i>🏠</i>
+                    <a href="homepage1Prateek.html" class="nav-link">
+                        <i class="fa-solid fa-house"></i>
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-
-                    <a href="#" class="nav-link active" data-page="worker-registry">
-                        <i>👥</i>
+                    <a href="WorkerReg.html" class="nav-link active">
+                        <i style="font-style: normal;">👥</i>
                         Worker Registry
                     </a>
                 </li>
                 <li class="nav-item">
-
-
-                    <a href="#" class="nav-link" data-page="health-records">
-                        <i>❤️</i>
+                    <a href="healthrec4.html" class="nav-link">
+                        <i class="fa-regular fa-heart"></i>
                         Health Records
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" data-page="documents">
-                        <i>📄</i>
+                    <a href="DocMang.html" class="nav-link">
+                        <i class="fa-regular fa-file"></i>
                         Documents
                     </a>
                 </li>
@@ -507,8 +504,8 @@
                     <h2>Worker Registry</h2>
                     <p>Manage migrant worker registrations and profiles</p>
                 </div>
-                <button class="register-btn">
-                    <span>+</span>
+                <button class="register-btn" onclick="window.location.href='Regform2.html'">
+                    <span><i class="fa-solid fa-plus"></i></span>
                     Register New Worker
                 </button>
             </div>
@@ -673,10 +670,11 @@
     </div>
 
     <script>
-        // Navigation functionality
+        // Add click handlers for navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
+                // The following line was commented out to enable navigation
+                // e.preventDefault();
 
                 // Remove active class from all links
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -684,8 +682,8 @@
                 // Add active class to clicked link
                 link.classList.add('active');
 
-                const page = link.getAttribute('data-page');
-                console.log('Navigating to:', page);
+                // You can add page switching logic here
+                console.log('Navigating to:', link.textContent.trim());
             });
         });
 

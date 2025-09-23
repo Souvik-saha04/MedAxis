@@ -346,13 +346,13 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                <h1>Kerala DHR System</h1>
+                <img src="MedicalCare.png" alt="description" width="200" height="200">
                 <p>Digital Health Records for Migrant Workers</p>
             </div>
 
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="homepage1Prateek.html" class="nav-link active">
                         <i class="fa-solid fa-house"></i>
                         Dashboard
                     </a>
@@ -364,13 +364,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="healthrec4.html" class="nav-link">
                         <i class="fa-regular fa-heart"></i>
                         Health Records
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="DocMang.html" class="nav-link">
                         <i class="fa-regular fa-file"></i>
                         Documents
                     </a>
@@ -575,7 +575,8 @@
         // Add click handlers for navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
+                // The following line was commented out to enable navigation
+                // e.preventDefault();
 
                 // Remove active class from all links
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));

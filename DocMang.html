@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <title>Kerala DHR System - Document Management</title>
     <style>
         * {
@@ -26,137 +27,143 @@
         /* Sidebar Styles */
         .sidebar {
             width: 280px;
-            background-color: #fff;
-            border-right: 1px solid #e0e0e0;
-            padding: 20px 0;
-            position: relative;
+            background: white;
+            border-right: 1px solid #e9ecef;
+            padding: 24px 0;
         }
 
-        .logo-section {
-            padding: 0 20px 30px;
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 20px;
+        .logo {
+            padding: 0 24px 32px 24px;
+            border-bottom: 1px solid #e9ecef;
         }
 
-        .logo-title {
+        .logo h1 {
             font-size: 20px;
             font-weight: 600;
-            margin-bottom: 5px;
+            color: #212529;
+            margin-bottom: 4px;
         }
 
-        .logo-subtitle {
+        .logo p {
             font-size: 14px;
-            color: #666;
+            color: #6c757d;
+            line-height: 1.4;
         }
 
         .nav-menu {
-            padding: 0 10px;
+            list-style: none;
+            padding: 24px 0;
         }
 
         .nav-item {
+            margin-bottom: 4px;
+        }
+
+        .nav-link {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            margin-bottom: 5px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            padding: 12px 24px;
             text-decoration: none;
-            color: #666;
+            color: #6c757d;
+            font-size: 15px;
+            transition: all 0.2s;
         }
 
-        .nav-item:hover {
-            background-color: #f8f9fa;
-            color: #333;
+        .nav-link.active {
+            background: #1a1d29;
+            color: white;
+            margin: 0 12px;
+            border-radius: 8px;
         }
 
-        .nav-item.active {
-            background-color: #1a1a1a;
-            color: #fff;
+        .nav-link:hover:not(.active) {
+            background: #f8f9fa;
+            color: #495057;
         }
 
-        .nav-icon {
+        .nav-link i {
+            width: 20px;
+            height: 20px;
             margin-right: 12px;
             font-size: 18px;
         }
 
         .system-status {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
+            margin: 24px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
         }
 
         .status-header {
-            font-size: 14px;
-            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 8px;
         }
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-        }
-
-        .status-text {
+        .status-badge {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-size: 12px;
-            color: #666;
+            font-weight: 600;
+        }
+
+        .status-time {
+            font-size: 13px;
+            color: #6c757d;
         }
 
         /* Main Content Styles */
         .main-content {
             flex: 1;
-            padding: 30px 40px;
+            padding: 32px;
+            background: #f8f9fa;
         }
 
         .header {
-            margin-bottom: 30px;
-        }
-
-        .page-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .page-subtitle {
-            font-size: 16px;
-            color: #666;
+            display: block;
+            margin-bottom: 32px;
         }
 
         .add-document-btn {
-            background-color: #1a1a1a;
+            background: #1a1d29;
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 14px;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            transition: background-color 0.2s ease;
-            width: 100%;
-            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s;
         }
 
         .add-document-btn:hover {
-            background-color: #333;
+            background: #2a2d39;
+        }
+
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .controls-white-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 30px;
         }
 
         .search-box {
             position: relative;
-            margin-bottom: 30px;
+            flex: 1;
         }
 
         .search-input {
@@ -314,25 +321,28 @@
             display: none;
         }
 
-        .help-button {
+        .modal-overlay {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #1a1a1a;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.2s ease;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
         }
 
-        .help-button:hover {
-            background-color: #333;
-            transform: translateY(-2px);
+        .modal-btn {
+            background: #1a1d29;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -361,69 +371,76 @@
 
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo-section">
-                <div class="logo-title">Kerala DHR System</div>
-                <div class="logo-subtitle">Digital Health Records for Migrant Workers</div>
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="MedicalCare.png" alt="description" width="200" height="200">
+                <p>Digital Health Records for Migrant Workers</p>
             </div>
 
-            <nav class="nav-menu">
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">🏠</span>
-                    Dashboard
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">👥</span>
-                    Worker Registry
-                </a>
-                <a href="#" class="nav-item">
-                    <span class="nav-icon">❤️</span>
-                    Health Records
-                </a>
-                <a href="#" class="nav-item active">
-                    <span class="nav-icon">📄</span>
-                    Documents
-                </a>
-            </nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="homepage1Prateek.html" class="nav-link">
+                        <i class="fa-solid fa-house"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="WorkerReg.html" class="nav-link">
+                        <i style="font-style: normal;">👥</i>
+                        Worker Registry
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="healthrec4.html" class="nav-link">
+                        <i class="fa-regular fa-heart"></i>
+                        Health Records
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="DocMang.html" class="nav-link active">
+                        <i class="fa-regular fa-file"></i>
+                        Documents
+                    </a>
+                </li>
+            </ul>
 
             <div class="system-status">
-                <div class="status-header">System Status</div>
-                <div class="status-indicator">
-                    <span class="status-dot"></span>
-                    <span class="status-text">Online</span>
+                <div class="status-header">
+                    <span style="font-weight: 600; font-size: 14px;">System Status</span>
+                    <span class="status-badge">Online</span>
                 </div>
-                <div class="status-text">Last sync: 2 mins ago</div>
+                <p class="status-time">Last sync: 2 mins ago</p>
             </div>
-        </div>
+        </aside>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="header">
-                <h1 class="page-title">Document Management</h1>
-                <p class="page-subtitle">Track and manage documents for migrant workers</p>
+                <h1>Document Management</h1>
+                <p>Track and manage documents for migrant workers</p>
             </div>
 
-            <button class="add-document-btn">
-                <span>+</span>
-                Add New Document
-            </button>
-
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" placeholder="Search Workers or Documents" id="searchInput">
+            <div class="controls-white-box">
+                <div class="controls-bar">
+                    <button class="add-document-btn">
+                        <span><i class="fa-solid fa-plus"></i></span>
+                        Add New Document
+                    </button>
+                    <div class="search-box">
+                        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" class="search-input" placeholder="Search Workers or Documents"
+                            id="searchInput">
+                    </div>
+                </div>
             </div>
 
             <!-- Rajesh Kumar Section -->
             <div class="worker-section" data-worker="rajesh kumar">
                 <div class="worker-header">
                     <div class="worker-info">
-                        <div class="worker-details">
-                            <h3>Rajesh Kumar</h3>
-                        </div>
+                        <h3>Rajesh Kumar</h3>
                         <div class="document-count">4 Documents</div>
                     </div>
-                    <div class="expand-toggle">⌄</div>
+                    <div class="expand-toggle"><i class="fa-solid fa-chevron-down"></i></div>
                 </div>
                 <div class="documents-container">
                     <div class="document-item aadhaar">
@@ -432,7 +449,7 @@
                             <div class="document-title">Aadhaar Card</div>
                             <div class="document-date">15/01/2024</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🏥</div>
@@ -440,7 +457,7 @@
                             <div class="document-title">Blood Test Report</div>
                             <div class="document-date">12/09/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">💉</div>
@@ -448,7 +465,7 @@
                             <div class="document-title">Vaccination Certificate</div>
                             <div class="document-date">28/07/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🫀</div>
@@ -456,7 +473,7 @@
                             <div class="document-title">Health Checkup Report</div>
                             <div class="document-date">05/06/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                 </div>
             </div>
@@ -465,12 +482,10 @@
             <div class="worker-section" data-worker="priya sharma">
                 <div class="worker-header">
                     <div class="worker-info">
-                        <div class="worker-details">
-                            <h3>Priya Sharma</h3>
-                        </div>
+                        <h3>Priya Sharma</h3>
                         <div class="document-count">3 Documents</div>
                     </div>
-                    <div class="expand-toggle">⌄</div>
+                    <div class="expand-toggle"><i class="fa-solid fa-chevron-down"></i></div>
                 </div>
                 <div class="documents-container">
                     <div class="document-item aadhaar">
@@ -479,7 +494,7 @@
                             <div class="document-title">Aadhaar Card</div>
                             <div class="document-date">22/03/2024</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🔬</div>
@@ -487,7 +502,7 @@
                             <div class="document-title">Lab Test Results</div>
                             <div class="document-date">18/08/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🩺</div>
@@ -495,7 +510,7 @@
                             <div class="document-title">Medical Examination</div>
                             <div class="document-date">10/04/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                 </div>
             </div>
@@ -504,12 +519,10 @@
             <div class="worker-section" data-worker="suresh patel">
                 <div class="worker-header">
                     <div class="worker-info">
-                        <div class="worker-details">
-                            <h3>Suresh Patel</h3>
-                        </div>
+                        <h3>Suresh Patel</h3>
                         <div class="document-count">5 Documents</div>
                     </div>
-                    <div class="expand-toggle">⌄</div>
+                    <div class="expand-toggle"><i class="fa-solid fa-chevron-down"></i></div>
                 </div>
                 <div class="documents-container">
                     <div class="document-item aadhaar">
@@ -518,7 +531,7 @@
                             <div class="document-title">Aadhaar Card</div>
                             <div class="document-date">08/12/2023</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🔬</div>
@@ -526,7 +539,7 @@
                             <div class="document-title">Chest X-Ray Report</div>
                             <div class="document-date">15/09/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">💉</div>
@@ -534,7 +547,7 @@
                             <div class="document-title">COVID Vaccination</div>
                             <div class="document-date">03/08/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🏥</div>
@@ -542,7 +555,7 @@
                             <div class="document-title">Blood Pressure Report</div>
                             <div class="document-date">20/07/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🩺</div>
@@ -550,7 +563,7 @@
                             <div class="document-title">Annual Health Checkup</div>
                             <div class="document-date">12/05/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                 </div>
             </div>
@@ -559,12 +572,10 @@
             <div class="worker-section" data-worker="mohammed ali">
                 <div class="worker-header">
                     <div class="worker-info">
-                        <div class="worker-details">
-                            <h3>Mohammed Ali</h3>
-                        </div>
+                        <h3>Mohammed Ali</h3>
                         <div class="document-count">3 Documents</div>
                     </div>
-                    <div class="expand-toggle">⌄</div>
+                    <div class="expand-toggle"><i class="fa-solid fa-chevron-down"></i></div>
                 </div>
                 <div class="documents-container">
                     <div class="document-item aadhaar">
@@ -573,7 +584,7 @@
                             <div class="document-title">Aadhaar Card</div>
                             <div class="document-date">30/11/2023</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🫀</div>
@@ -581,7 +592,7 @@
                             <div class="document-title">ECG Report</div>
                             <div class="document-date">25/08/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🩺</div>
@@ -589,7 +600,7 @@
                             <div class="document-title">Diabetes Screening</div>
                             <div class="document-date">14/06/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                 </div>
             </div>
@@ -598,12 +609,10 @@
             <div class="worker-section" data-worker="lakshmi nair">
                 <div class="worker-header">
                     <div class="worker-info">
-                        <div class="worker-details">
-                            <h3>Lakshmi Nair</h3>
-                        </div>
+                        <h3>Lakshmi Nair</h3>
                         <div class="document-count">4 Documents</div>
                     </div>
-                    <div class="expand-toggle">⌄</div>
+                    <div class="expand-toggle"><i class="fa-solid fa-chevron-down"></i></div>
                 </div>
                 <div class="documents-container">
                     <div class="document-item aadhaar">
@@ -612,7 +621,7 @@
                             <div class="document-title">Aadhaar Card</div>
                             <div class="document-date">18/02/2024</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🔬</div>
@@ -620,7 +629,7 @@
                             <div class="document-title">Pregnancy Test Report</div>
                             <div class="document-date">10/09/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">💉</div>
@@ -628,7 +637,7 @@
                             <div class="document-title">Tetanus Vaccination</div>
                             <div class="document-date">22/07/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="document-item">
                         <div class="document-icon">🩺</div>
@@ -636,15 +645,14 @@
                             <div class="document-title">General Health Checkup</div>
                             <div class="document-date">05/05/2025</div>
                         </div>
-                        <div class="document-action">👁️</div>
+                        <div class="document-action"><i class="fa-solid fa-eye"></i></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <button class="help-button">?</button>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script>
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', function (e) {
@@ -685,35 +693,41 @@
 
         // Add New Document button functionality
         document.querySelector('.add-document-btn').addEventListener('click', function () {
-            alert('Add New Document functionality would open a form to select worker and upload document');
+            const mainContent = document.querySelector('.main-content');
+            const messageBox = document.createElement('div');
+            messageBox.classList.add('modal-overlay');
+            messageBox.innerHTML = `
+                <p class="text-xl font-semibold mb-4">Add New Document</p>
+                <p class="text-gray-600 mb-6">Functionality to open a form for selecting a worker and uploading a document would go here.</p>
+                <button onclick="this.parentElement.remove()" class="modal-btn">Close</button>
+            `;
+            mainContent.appendChild(messageBox);
         });
 
         // Document action buttons
         document.querySelectorAll('.document-action').forEach(button => {
             button.addEventListener('click', function () {
                 const documentTitle = this.parentElement.querySelector('.document-title').textContent;
-                const workerName = this.closest('.worker-section').querySelector('.worker-details h3').textContent;
-                alert(`Viewing: ${documentTitle} for ${workerName}`);
+                const workerName = this.closest('.worker-section').querySelector('h3').textContent;
+
+                const mainContent = document.querySelector('.main-content');
+                const messageBox = document.createElement('div');
+                messageBox.classList.add('modal-overlay');
+                messageBox.innerHTML = `
+                    <p class="text-xl font-semibold mb-4">Viewing Document</p>
+                    <p class="text-gray-600 mb-6">Viewing: ${documentTitle} for ${workerName}</p>
+                    <button onclick="this.parentElement.remove()" class="modal-btn">Close</button>
+                `;
+                mainContent.appendChild(messageBox);
             });
         });
 
         // Navigation items
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function (e) {
-                if (this.href === '#') {
-                    e.preventDefault();
-                }
-
-                document.querySelectorAll('.nav-item').forEach(navItem => {
-                    navItem.classList.remove('active');
-                });
-                this.classList.add('active');
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
             });
-        });
-
-        // Help button
-        document.querySelector('.help-button').addEventListener('click', function () {
-            alert('Help: This is the Document Management system for Kerala DHR. Each worker has their own section with Aadhaar card at the top, followed by medical documents sorted by date (newest first). Use the search bar to find specific workers or documents.');
         });
 
         // Sort documents by date (newest first) while keeping Aadhaar at top
@@ -722,16 +736,16 @@
                 const aadhaarCard = container.querySelector('.document-item.aadhaar');
                 const otherDocuments = Array.from(container.querySelectorAll('.document-item:not(.aadhaar)'));
 
-                // Sort other documents by date (newest first)
                 otherDocuments.sort((a, b) => {
                     const dateA = new Date(a.querySelector('.document-date').textContent.split('/').reverse().join('-'));
                     const dateB = new Date(b.querySelector('.document-date').textContent.split('/').reverse().join('-'));
                     return dateB - dateA;
                 });
 
-                // Clear container and rebuild with Aadhaar first, then sorted documents
                 container.innerHTML = '';
-                container.appendChild(aadhaarCard);
+                if (aadhaarCard) {
+                    container.appendChild(aadhaarCard);
+                }
                 otherDocuments.forEach(doc => container.appendChild(doc));
             });
         }
