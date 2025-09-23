@@ -585,6 +585,88 @@
             opacity: 0.9;
         }
 
+        /* Card Base */
+        .card.action-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin: 20px 0;
+            font-family: "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* Title */
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        /* Resource Items */
+        .resource-allocation {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #333;
+            gap: 12px;
+        }
+
+        .resource-item span:first-child {
+            flex: 1;
+        }
+
+        /* Progress Bar */
+        .resource-bar {
+            flex: 2;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 0 10px;
+        }
+
+        .resource-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.4s ease-in-out;
+        }
+
+        /* Actions Section */
+        .actions-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        /* Buttons */
+        .action-btn.purple {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            border: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-btn.purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
         /* Modal styling */
         .modal {
             display: none;
@@ -774,7 +856,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="WorkerReg.html" class="nav-link">
                         <i style="font-style: normal;">👥</i>
                         Worker Registry
                     </a>
