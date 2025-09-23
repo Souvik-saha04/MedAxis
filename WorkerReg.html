@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <title>Kerala DHR System - Worker Registry</title>
     <style>
         * {
@@ -454,7 +455,6 @@
 
 <body>
     <div class="container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <img src="MedicalCare.png" alt="description" width="200" height="200">
@@ -497,27 +497,22 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <div class="header">
                 <div class="header-left">
                     <h2>Worker Registry</h2>
                     <p>Manage migrant worker registrations and profiles</p>
                 </div>
-                <<<<<<< HEAD <button class="register-btn">
-                    <span>+</span>
-                    =======
-                    <button class="register-btn" onclick="window.location.href='Regform2.html'">
-                        <span><i class="fa-solid fa-plus"></i></span>
-                        >>>>>>> Prateek
-                        Register New Worker
-                    </button>
+
+                <button class="register-btn" onclick="window.location.href='Regform2.html'">
+                    <span><i class="fa-solid fa-plus"></i></span>
+                    Register New Worker
+                </button>
             </div>
 
-            <!-- Controls Bar -->
             <div class="controls-bar">
                 <div class="search-container">
-                    <span class="search-icon">🔍</span>
+                    <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                     <input type="text" class="search-input" placeholder="Search by name, ID, or state...">
                 </div>
 
@@ -529,13 +524,12 @@
                     <button class="filter-tab" data-status="pending">Pending Check</button>
                 </div>
 
-                <button class="export-btn">
-                    <span>⬇</span>
+                <button class="export-btn" style="background-color: #212529; color: white;">
+                    <span><i class="fa-solid fa-arrow-down"></i></span>
                     Export
                 </button>
             </div>
 
-            <!-- Table -->
             <div class="table-container">
                 <table class="table">
                     <thead>
@@ -561,8 +555,9 @@
                             <td><span class="doc-status doc-complete">Complete</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -576,8 +571,9 @@
                             <td><span class="doc-status doc-pending">Pending</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -591,8 +587,9 @@
                             <td><span class="doc-status doc-complete">Complete</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -606,8 +603,9 @@
                             <td><span class="doc-status doc-incomplete">Incomplete</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -621,8 +619,9 @@
                             <td><span class="doc-status doc-complete">Complete</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -636,8 +635,9 @@
                             <td><span class="doc-status doc-pending">Pending</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -651,15 +651,15 @@
                             <td><span class="doc-status doc-complete">Complete</span></td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn" title="View Details">👁</button>
-                                    <button class="action-btn" title="Edit">✏️</button>
+                                    <button class="action-btn" title="View Details"><i
+                                            class="fa-solid fa-eye"></i></button>
+                                    <button class="action-btn" title="Edit"><i class="fa-solid fa-pencil"></i></button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <!-- Pagination -->
                 <div class="pagination-container">
                     <div class="pagination">
                         <button class="pagination-btn" disabled>‹</button>
